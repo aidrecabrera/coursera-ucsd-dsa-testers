@@ -25,31 +25,30 @@ int main() {
     char next = text[position];
 
     if (next == '(' || next == '[' || next == '{') {
-      // Process opening bracket, write your code here
       opening_brackets_stack.push(Bracket(next, position));
     }
 
     if (next == ')' || next == ']' || next == '}') {
-      // Process closing bracket, write your code here
       if (opening_brackets_stack.empty()) {
-        std::cout << position + 1;
+        std::cout << position + 1 << std::endl;
         return 0;
       }
+
       Bracket top = opening_brackets_stack.top();
       opening_brackets_stack.pop();
+
       if (!top.Matchc(next)) {
-        std::cout << position + 1;
+        std::cout << position + 1 << std::endl;
         return 0;
       }
     }
   }
 
-  // Printing answer, write your code here
-
-  if (!opening_brackets_stack.empty()) {
-    std::cout << opening_brackets_stack.top().position;
+  if (opening_brackets_stack.empty()) {
+    std::cout << "Success" << std::endl;
   } else {
-    std::cout << "Success";
+    Bracket top = opening_brackets_stack.top();
+    std::cout << top.position + 1 << std::endl;
   }
 
   return 0;
